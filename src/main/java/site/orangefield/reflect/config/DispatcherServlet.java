@@ -2,6 +2,7 @@ package site.orangefield.reflect.config;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
@@ -49,14 +50,25 @@ public class DispatcherServlet extends HttpServlet {
 			if (identifier.equals(requestMapping.value())) {
 				try {
 					Parameter[] params = method.getParameters();
-					for (Parameter param : params) {
-						// 1. HttpServletRequest 찾아서 req 넣기
+					Object[] queue = new Object[params.length];
 
-						// 2. HttpServletRequest 찾아서 resp 넣기
+					for (int i = 0; i < params.length; i++) {
+						Class<?> cls = params[i].getType();
+						System.out.println("cls : " + cls);
 
-						// 3. Member 찾았는데 없다! -> new해서 넣어주기
-
+						if (cls == HttpServletRequest.class) {
+							System.out.println("Request 찾음");
+							queue[i] = req;
+						} else if (cls == HttpServletResponse.class) {
+							System.out.println("Response 찾음");
+							queue[i] = resp;
+						} else {
+							Constructor<?> constructor = cls.getConstructor();
+							queue[i] = constructor.newInstance();
+						}
+						System.out.println("size : " + queue.length);
 					}
+					method.invoke(memberController, queue);
 
 				} catch (Exception e) {
 					e.printStackTrace();
