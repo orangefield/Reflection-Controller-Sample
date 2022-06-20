@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import site.orangefield.reflect.config.MessageConverter;
 import site.orangefield.reflect.config.ViewResolver;
+import site.orangefield.reflect.config.web.RequestMapping;
 import site.orangefield.reflect.domain.Member;
 import site.orangefield.reflect.util.UtilsLog;
 
@@ -21,6 +22,7 @@ public class MemberController extends Controller {
 	private static final String TAG = "MemberController : ";
 	
 	/* GET /join */
+	@RequestMapping("/join")
 	public void join(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		UtilsLog.getInstance().info(TAG, "join()");
 		UtilsLog.getInstance().info(TAG, "Service가 호출되어 회원가입이 완료되었습니다");
@@ -31,6 +33,7 @@ public class MemberController extends Controller {
 	}
 	
 	/* GET /login */
+	@RequestMapping(value = "/login")
 	public void login(HttpServletRequest request, HttpServletResponse response) {
 		UtilsLog.getInstance().info(TAG, "login()");
 		UtilsLog.getInstance().info(TAG, "Service가 호출되어 로그인이 완료되었습니다");
@@ -40,9 +43,10 @@ public class MemberController extends Controller {
 	}
 	
 	/* GET /findById */
+	@RequestMapping(value = "/findById")
 	public void findById(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		UtilsLog.getInstance().info(TAG, "login()");
-		UtilsLog.getInstance().info(TAG, "Service가 호출되어 로그인이 완료되었습니다");
+		UtilsLog.getInstance().info(TAG, "findById()");
+		UtilsLog.getInstance().info(TAG, "Service가 호출되어 Member를 찾았습니다");
 		
 		Member memberEntity = new Member(1, "ares", "1234");
 		MessageConverter.resolve(memberEntity, response);
