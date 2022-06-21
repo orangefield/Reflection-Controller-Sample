@@ -26,6 +26,7 @@ public class MemberController{
 	public void join(Member member, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		UtilsLog.getInstance().info(TAG, "join()");
 		UtilsLog.getInstance().info(TAG, "Service가 호출되어 회원가입이 완료되었습니다");
+		UtilsLog.getInstance().info(TAG, member.getUsername() +", "+member.getPassword());
 //		HttpSession session = request.getSession();
 //		response.sendRedirect("main.jsp"); // ViewResolver가 찾아줌
 		request.setAttribute("username", "ares");
