@@ -18,7 +18,7 @@ public class MessageConverter {
 			
 			Gson gson = new Gson();
 			String responseBody = gson.toJson(data);
-			out.println(data);
+			out.println(responseBody);
 			out.flush();
 			
 		} catch (Exception e) {

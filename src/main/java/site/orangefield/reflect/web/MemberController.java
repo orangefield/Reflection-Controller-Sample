@@ -17,13 +17,13 @@ import site.orangefield.reflect.domain.Member;
 import site.orangefield.reflect.util.UtilsLog;
 
 // API
-public class MemberController extends Controller {
+public class MemberController{
 
 	private static final String TAG = "MemberController : ";
 	
 	/* GET /join */
 	@RequestMapping("/join")
-	public void join(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void join(Member member, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		UtilsLog.getInstance().info(TAG, "join()");
 		UtilsLog.getInstance().info(TAG, "Service가 호출되어 회원가입이 완료되었습니다");
 //		HttpSession session = request.getSession();

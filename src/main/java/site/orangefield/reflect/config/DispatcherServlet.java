@@ -54,7 +54,6 @@ public class DispatcherServlet extends HttpServlet {
 
 					for (int i = 0; i < params.length; i++) {
 						Class<?> cls = params[i].getType();
-						System.out.println("cls : " + cls);
 
 						if (cls == HttpServletRequest.class) {
 							System.out.println("Request 찾음");
@@ -65,6 +64,13 @@ public class DispatcherServlet extends HttpServlet {
 						} else {
 							Constructor<?> constructor = cls.getConstructor();
 							queue[i] = constructor.newInstance();
+							
+							for (Method m : queue[i].getClass().getDeclaredMethods()) {
+								System.out.println(req.getParameter("username"));
+								System.out.println(req.getParameter("password"));
+								System.out.println(m.getName());
+							}
+							
 						}
 						System.out.println("size : " + queue.length);
 					}
